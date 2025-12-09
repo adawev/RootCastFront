@@ -2,9 +2,10 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect, useMemo } from "react";
 import { connect } from "react-redux";
 import { getWeather } from "../store/reducers/Weather";
+import { toast } from "sonner";
 
 function CheckWeather({ getWeather, weathercheck, loading }) {
-    const { handleSubmit, register, setValue } = useForm();
+    const { handleSubmit, register, setValue, formState: { errors } } = useForm();
     const [cities, setCities] = useState([]);
     const [filteredCities, setFilteredCities] = useState([]);
     const [touristTips, setTouristTips] = useState([]);
@@ -38,7 +39,23 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
     // Form submit
     const onSubmitForm = (data) => {
         const { city, date } = data;
-        if (!city) return;
+        if (!city || city.trim() === '') {
+            toast.error("Please enter a city name");
+            return;
+        }
+
+        // Validate date is not in the past
+        if (date) {
+            const selectedDate = new Date(date);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            if (selectedDate < today) {
+                toast.error("Please select today or a future date");
+                return;
+            }
+        }
+
         getWeather({ city, date });
     };
 
@@ -92,10 +109,16 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
                         <input
                             type="text"
                             placeholder="Enter city"
-                            {...register("city")}
+                            {...register("city", {
+                                required: "City is required",
+                                minLength: { value: 2, message: "City name must be at least 2 characters" }
+                            })}
                             onChange={handleCityChange}
                             autoComplete="off"
+                            aria-label="City name"
+                            aria-invalid={errors.city ? "true" : "false"}
                         />
+                        {errors.city && <span className="error-message">{errors.city.message}</span>}
                         {filteredCities.length > 0 && (
                             <div className="autocomplete-list">
                                 {filteredCities.map((c) => (
@@ -107,7 +130,13 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
                         )}
                     </div>
 
-                    <input type="date" className="date-input" {...register("date")} />
+                    <input
+                        type="date"
+                        className="date-input"
+                        {...register("date")}
+                        min={new Date().toISOString().split('T')[0]}
+                        aria-label="Select date"
+                    />
                     <button type="submit" form="CheckWeatherForm">Get Weather</button>
                 </form>
             </div>
