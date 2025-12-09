@@ -1,6 +1,7 @@
 import {useForm} from "react-hook-form";
 import {useState} from "react";
 import {toast} from "sonner";
+import Footer from "./Footer";
 
 function Contacts() {
     const {handleSubmit, register, reset, formState: {errors}} = useForm();
@@ -50,7 +51,7 @@ function Contacts() {
                                 </div>
                                 <div className="contact-details">
                                     <h3>Phone</h3>
-                                    <a href="tel:+1234567890">+1 (234) 567-890</a>
+                                    <a href="tel:+1234567890">+998 (93) 239-00-02</a>
                                 </div>
                             </div>
 
@@ -60,7 +61,7 @@ function Contacts() {
                                 </div>
                                 <div className="contact-details">
                                     <h3>Address</h3>
-                                    <p>123 Weather St, Climate City, CC 12345</p>
+                                    <p>Tashkent, Uzbekistan</p>
                                 </div>
                             </div>
                         </div>
@@ -71,13 +72,10 @@ function Contacts() {
                                 <a href="https://github.com/adawev" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                                     <i className="fab fa-github"></i>
                                 </a>
-                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <a href="https://linkedin.com/in/adawev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                                     <i className="fab fa-linkedin"></i>
                                 </a>
-                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                                    <i className="fab fa-twitter"></i>
-                                </a>
-                                <a href="https://t.me" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                                <a href="https://t.me/adawev" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
                                     <i className="fab fa-telegram"></i>
                                 </a>
                             </div>
@@ -166,6 +164,7 @@ function Contacts() {
                     </div>
                 </div>
             </section>
+            <Footer/>
         </div>
     );
 }

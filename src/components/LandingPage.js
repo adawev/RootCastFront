@@ -1,4 +1,5 @@
 import {Link} from "react-router";
+import Footer from "./Footer";
 
 function LandingPage() {
     return <div>
@@ -94,7 +95,7 @@ function LandingPage() {
                 </div>
             </div>
         </section>
-
+        <Footer/>
     </div>
 }
 

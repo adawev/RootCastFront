@@ -91,6 +91,23 @@ button {
     opacity: 1;
 }
 
+.nav-links a.active {
+    opacity: 1;
+    position: relative;
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: #fff;
+    border-radius: 50%;
+}
+
 .logo {
     margin-left: -1.5rem;
     width: 280px;
@@ -516,6 +533,7 @@ button {
         linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 100%),
         url("../../public/images/nature2.jpg") center/cover no-repeat fixed;
     position: relative;
+    height: 1100px;
 }
 
 .checkPage::before {
@@ -796,7 +814,6 @@ button {
 
 /* ===== CONTACTS PAGE ===== */
 .contacts-page {
-    padding-top: 8rem;
     min-height: 100vh;
 }
 
@@ -1156,6 +1173,77 @@ button {
     font-weight: 600;
 }
 
+.error-container {
+    max-width: 700px;
+    margin: 3rem auto;
+    background: #fff;
+    border: 2px solid #fecaca;
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.error-icon-box {
+    width: 60px;
+    height: 60px;
+    background: #fee2e2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.error-icon-box i {
+    font-size: 2rem;
+    color: #dc2626;
+}
+
+.error-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+}
+
+.error-content p {
+    color: #dc2626;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.error-suggestions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.error-suggestions li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.error-suggestions li i {
+    color: #16a34a;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .error-container {
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+    }
+}
+
 /* Skeleton Loader */
 .skeleton {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
@@ -1291,6 +1379,122 @@ button {
     transform: translateY(-3px);
     background: var(--bg-light);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== ERROR BOUNDARY ===== */
+.error-boundary-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+}
+
+.error-boundary-content {
+    text-align: center;
+    max-width: 700px;
+    background: #fff;
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: var(--shadow-xl);
+}
+
+.error-icon {
+    font-size: 6rem;
+    color: #dc2626;
+    margin-bottom: 2rem;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.error-boundary-page h1 {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.error-boundary-page p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.error-details {
+    text-align: left;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--bg-light);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.error-details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.error-details pre {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    color: #dc2626;
+}
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-reload,
+.btn-home-error {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+}
+
+.btn-reload {
+    background: #dc2626;
+    color: #fff;
+}
+
+.btn-reload:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
+    background: #b91c1c;
+}
+
+.btn-home-error {
+    background: var(--primary-black);
+    color: #fff;
+}
+
+.btn-home-error:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* ===== RESPONSIVE DESIGN ===== */

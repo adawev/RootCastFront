@@ -5,13 +5,16 @@ import {Provider} from "react-redux";
 import store from "./store/store";
 import {BrowserRouter} from "react-router";
 import {Toaster} from "sonner";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <BrowserRouter>
-        <Provider store={store}>
-            <Toaster position="top-center" richColors/>
-            <App/>
-        </Provider>
-    </BrowserRouter>
+    <ErrorBoundary>
+        <BrowserRouter>
+            <Provider store={store}>
+                <Toaster position="top-center" richColors/>
+                <App/>
+            </Provider>
+        </BrowserRouter>
+    </ErrorBoundary>
 );

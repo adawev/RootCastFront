@@ -1,4 +1,4 @@
-import {Outlet, Link} from "react-router";
+import {Outlet, Link, NavLink} from "react-router";
 import {useState} from "react";
 import "./style.css"
 import Footer from "./Footer";
@@ -23,10 +23,43 @@ function Navbar({footer}) {
                         </Link>
                     </li>
                     <div className={`nav-center ${mobileMenuOpen ? 'mobile-active' : ''}`}>
-                        <li><Link to="/" onClick={closeMobileMenu}>Home</Link></li>
-                        <li><Link to="/check-weather" onClick={closeMobileMenu}>Check Weather</Link></li>
-                        <li><Link to="/about" onClick={closeMobileMenu}>About</Link></li>
-                        <li><Link to="/contacts" onClick={closeMobileMenu}>Contacts</Link></li>
+                        <li>
+                            <NavLink
+                                to="/"
+                                onClick={closeMobileMenu}
+                                className={({isActive}) => isActive ? 'active' : ''}
+                                end
+                            >
+                                Home
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/check-weather"
+                                onClick={closeMobileMenu}
+                                className={({isActive}) => isActive ? 'active' : ''}
+                            >
+                                Check Weather
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/about"
+                                onClick={closeMobileMenu}
+                                className={({isActive}) => isActive ? 'active' : ''}
+                            >
+                                About
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/contacts"
+                                onClick={closeMobileMenu}
+                                className={({isActive}) => isActive ? 'active' : ''}
+                            >
+                                Contacts
+                            </NavLink>
+                        </li>
                     </div>
                     <button className="mobile-menu-toggle" onClick={toggleMobileMenu} aria-label="Toggle navigation menu">
                         <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
@@ -34,7 +67,6 @@ function Navbar({footer}) {
                 </ul>
             </nav>
             <Outlet/>
-            {footer? null:<Footer/> }
         </div>
     );
 }

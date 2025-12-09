@@ -1,3 +1,5 @@
+import Footer from "./Footer";
+
 function About() {
     return <div className={'aboutSectionWrapper'}>
 
@@ -93,14 +95,13 @@ function About() {
                     <div className="member-name">Isayev Alibek</div>
                     <div className="member-role">UI/UX Designer</div>
 
-                        <div className="member-socials">
-                            <a href="https://github.com/0-ATOM-0" target="_blank" rel="noopener noreferrer">
-                                <i className="fab fa-github"></i>
-                            </a>
-                            <a href="https://t.me/Al_Alibek" target="_blank" rel="noopener noreferrer">
-                                <i className="fab fa-telegram"></i>
-                            </a>
-                        </div>
+                    <div className="member-socials">
+                        <a href="https://github.com/0-ATOM-0" target="_blank" rel="noopener noreferrer">
+                            <i className="fab fa-github"></i>
+                        </a>
+                        <a href="https://t.me/Al_Alibek" target="_blank" rel="noopener noreferrer">
+                            <i className="fab fa-telegram"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -127,6 +128,7 @@ function About() {
                 </div>
             </div>
         </section>
+        <Footer/>
     </div>
 }
 

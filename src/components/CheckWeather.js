@@ -1,11 +1,12 @@
-import { useForm } from "react-hook-form";
-import { useState, useEffect, useMemo } from "react";
-import { connect } from "react-redux";
-import { getWeather } from "../store/reducers/Weather";
-import { toast } from "sonner";
+import {useForm} from "react-hook-form";
+import {useState, useEffect, useMemo} from "react";
+import {connect} from "react-redux";
+import {getWeather} from "../store/reducers/Weather";
+import {toast} from "sonner";
+import Footer from "./Footer";
 
-function CheckWeather({ getWeather, weathercheck, loading }) {
-    const { handleSubmit, register, setValue, formState: { errors } } = useForm();
+function CheckWeather({getWeather, weathercheck, loading}) {
+    const {handleSubmit, register, setValue, formState: {errors}} = useForm();
     const [cities, setCities] = useState([]);
     const [filteredCities, setFilteredCities] = useState([]);
     const [touristTips, setTouristTips] = useState([]);
@@ -56,7 +57,7 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
 
     // Form submit
     const onSubmitForm = (data) => {
-        const { city, date } = data;
+        const {city, date} = data;
         if (!city || city.trim() === '') {
             toast.error("Please enter a city name");
             return;
@@ -74,7 +75,7 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
             }
         }
 
-        getWeather({ city, date });
+        getWeather({city, date});
     };
 
     // City input search/filter
@@ -108,7 +109,7 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
         if (cardData.advice) filteredTips.push(cardData.advice);
 
         return filteredTips;
-    }, [cardData, touristTips]);
+    }, [cardData, touristTips, cityMapping]);
 
     return (
         <div className="checkPage">
@@ -118,13 +119,13 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
             {/* Form */}
             <div className="form-container">
                 <form className="form-control" id="CheckWeatherForm" onSubmit={handleSubmit(onSubmitForm)}>
-                    <div style={{ position: "relative" }}>
+                    <div style={{position: "relative"}}>
                         <input
                             type="text"
                             placeholder="Enter city"
                             {...register("city", {
                                 required: "City is required",
-                                minLength: { value: 2, message: "City name must be at least 2 characters" }
+                                minLength: {value: 2, message: "City name must be at least 2 characters"}
                             })}
                             onChange={handleCityChange}
                             autoComplete="off"
@@ -178,7 +179,23 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
             )}
 
             {/* Error */}
-            {weathercheck?.error && <div className="error">{weathercheck.error}</div>}
+            {weathercheck?.error && (
+                <div className="error-container">
+                    <div className="error-icon-box">
+                        <i className="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div className="error-content">
+                        <h3>Unable to fetch weather data</h3>
+                        <p>{weathercheck.error}</p>
+                        <ul className="error-suggestions">
+                            <li><i className="fas fa-check-circle"></i> Check the city name spelling</li>
+                            <li><i className="fas fa-check-circle"></i> Try selecting from the autocomplete suggestions
+                            </li>
+                            <li><i className="fas fa-check-circle"></i> Make sure you have an internet connection</li>
+                        </ul>
+                    </div>
+                </div>
+            )}
 
             {/* Cards */}
             {cardData && (
@@ -200,25 +217,27 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
                         </div>
 
                         <div className="weather-main">
-                            <div className="weather-temp">{cardData.temp !== undefined ? Math.round(cardData.temp) : "-"}°C</div>
+                            <div
+                                className="weather-temp">{cardData.temp !== undefined ? Math.round(cardData.temp) : "-"}°C
+                            </div>
                             <div className="weather-desc">{cardData.description || "-"} ({cardData.main || "-"})</div>
                         </div>
 
                         <div className="weather-details">
                             <div className="detail-item">
-                                <img src="https://cdn-icons-png.flaticon.com/512/481/481460.png" alt="wind" />
+                                <img src="https://cdn-icons-png.flaticon.com/512/481/481460.png" alt="wind"/>
                                 <span>Wind: {cardData.windSpeed || "-"} m/s</span>
                             </div>
                             <div className="detail-item">
-                                <img src="https://cdn-icons-png.flaticon.com/512/414/414974.png" alt="humidity" />
+                                <img src="https://cdn-icons-png.flaticon.com/512/414/414974.png" alt="humidity"/>
                                 <span>Humidity: {cardData.humidity || "-"}%</span>
                             </div>
                             <div className="detail-item">
-                                <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="pressure" />
+                                <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="pressure"/>
                                 <span>Pressure: {cardData.pressure || "-"} hPa</span>
                             </div>
                             <div className="detail-item">
-                                <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="feels like" />
+                                <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="feels like"/>
                                 <span>Feels like: {cardData.feelsLike || "-"}°C</span>
                             </div>
                         </div>
@@ -240,7 +259,9 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
 
                 </div>
             )}
+            <Footer/>
         </div>
+
     );
 }
 
@@ -249,4 +270,4 @@ const mapStateToProps = (state) => ({
     loading: state.weathercheck.loading,
 });
 
-export default connect(mapStateToProps, { getWeather })(CheckWeather);
+export default connect(mapStateToProps, {getWeather})(CheckWeather);
