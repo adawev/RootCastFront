@@ -1,3 +1,5 @@
+import {Link} from "react-router";
+
 function Footer() {
     return <div>
         <footer className="footer">
@@ -7,11 +9,10 @@ function Footer() {
                     Your reliable source for accurate weather forecasts worldwide. Stay informed, stay prepared.
                 </p>
                 <div className="footer-links">
-                    <a href="/home">Home</a>
-                    <a href="/check-weather">Check Weather</a>
-                    <a href="/about">About</a>
-                    <a href="/login">Login</a>
-                    <a href="/signup">Register</a>
+                    <Link to="/">Home</Link>
+                    <Link to="/check-weather">Check Weather</Link>
+                    <Link to="/about">About</Link>
+                    <Link to="/contacts">Contacts</Link>
                 </div>
                 <div className="footer-divider"></div>
                 <p className="footer-text">© 2025 RootCast. All rights reserved.</p>

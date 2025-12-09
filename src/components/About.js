@@ -90,8 +90,8 @@ function About() {
                         <img
                             src="https://avatars.githubusercontent.com/u/170262141?v=4" alt="Isayev Alibek"/>
                     </div>
-                    <div className="member-name">Isayev Alibek/div>
-                        <div className="member-role">UI/UX Designer</div>
+                    <div className="member-name">Isayev Alibek</div>
+                    <div className="member-role">UI/UX Designer</div>
 
                         <div className="member-socials">
                             <a href="https://github.com/0-ATOM-0" target="_blank" rel="noopener noreferrer">
