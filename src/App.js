@@ -4,6 +4,7 @@ import LandingPage from './components/LandingPage'
 import CheckWeather from "./components/CheckWeather";
 import Contacts from "./components/Contacts";
 import About from "./components/About";
+import NotFound from "./components/NotFound";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                     <Route path="/check-weather" element={<CheckWeather/>}/>
                     <Route path="/contacts" element={<Contacts/>}/>
                     <Route path="/about" element={<About/>}/>
+                    <Route path="*" element={<NotFound/>}/>
                 </Route>
             </Routes>
 

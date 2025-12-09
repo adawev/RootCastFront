@@ -9,6 +9,7 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
     const [cities, setCities] = useState([]);
     const [filteredCities, setFilteredCities] = useState([]);
     const [touristTips, setTouristTips] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
 
     const cityMapping = {
         Paris: "Paris",
@@ -36,6 +37,23 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
             .catch((err) => console.error("Tourist tips load error:", err));
     }, []);
 
+    // Debounced city search
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (!searchTerm || searchTerm.trim() === "") {
+                setFilteredCities([]);
+                return;
+            }
+            const val = searchTerm.toLowerCase();
+            const results = cities
+                .filter((c) => c.name.toLowerCase().startsWith(val))
+                .slice(0, 10);
+            setFilteredCities(results);
+        }, 300); // 300ms debounce delay
+
+        return () => clearTimeout(timer);
+    }, [searchTerm, cities]);
+
     // Form submit
     const onSubmitForm = (data) => {
         const { city, date } = data;
@@ -61,12 +79,7 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
 
     // City input search/filter
     const handleCityChange = (e) => {
-        const val = e.target.value.toLowerCase();
-        if (!val) return setFilteredCities([]);
-        const results = cities
-            .filter((c) => c.name.toLowerCase().startsWith(val))
-            .slice(0, 10);
-        setFilteredCities(results);
+        setSearchTerm(e.target.value);
     };
 
     const handleSelectCity = (city) => {
@@ -141,8 +154,28 @@ function CheckWeather({ getWeather, weathercheck, loading }) {
                 </form>
             </div>
 
-            {/* Loading */}
-            {loading && <div className="loading">Loading...</div>}
+            {/* Loading Skeleton */}
+            {loading && (
+                <div className="cards-container">
+                    <div className="weather-card skeleton-card">
+                        <div className="skeleton skeleton-header"></div>
+                        <div className="skeleton skeleton-temp"></div>
+                        <div className="skeleton skeleton-desc"></div>
+                        <div className="weather-details">
+                            <div className="skeleton skeleton-detail"></div>
+                            <div className="skeleton skeleton-detail"></div>
+                            <div className="skeleton skeleton-detail"></div>
+                            <div className="skeleton skeleton-detail"></div>
+                        </div>
+                    </div>
+                    <div className="tips-card skeleton-card">
+                        <div className="skeleton skeleton-header"></div>
+                        <div className="skeleton skeleton-tip"></div>
+                        <div className="skeleton skeleton-tip"></div>
+                        <div className="skeleton skeleton-tip"></div>
+                    </div>
+                </div>
+            )}
 
             {/* Error */}
             {weathercheck?.error && <div className="error">{weathercheck.error}</div>}
