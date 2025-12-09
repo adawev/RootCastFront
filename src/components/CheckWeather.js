@@ -119,7 +119,7 @@ function CheckWeather({getWeather, weathercheck, loading}) {
             {/* Form */}
             <div className="form-container">
                 <form className="form-control" id="CheckWeatherForm" onSubmit={handleSubmit(onSubmitForm)}>
-                    <div style={{position: "relative"}}>
+                    <div className="city-input-wrapper">
                         <input
                             type="text"
                             placeholder="Enter city"
@@ -178,6 +178,17 @@ function CheckWeather({getWeather, weathercheck, loading}) {
                 </div>
             )}
 
+            {/* Initial State - Show helpful message before search */}
+            {!loading && !weathercheck?.error && !cardData && (
+                <div className="empty-state">
+                    <div className="empty-state-icon">
+                        <i className="fas fa-cloud-sun"></i>
+                    </div>
+                    <h3>Ready to check the weather?</h3>
+                    <p>Enter a city name above and select a date to get started with accurate weather forecasts.</p>
+                </div>
+            )}
+
             {/* Error */}
             {weathercheck?.error && (
                 <div className="error-container">
@@ -197,8 +208,8 @@ function CheckWeather({getWeather, weathercheck, loading}) {
                 </div>
             )}
 
-            {/* Cards */}
-            {cardData && (
+            {/* Cards - Only show when data exists and no errors */}
+            {!loading && !weathercheck?.error && cardData && (
                 <div className="cards-container">
 
                     {/* Weather Card */}

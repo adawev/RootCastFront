@@ -527,13 +527,13 @@ button {
 
 /* ===== CHECK WEATHER PAGE ===== */
 .checkPage {
-    padding-top: 12vh;
+    padding-top: 16vh;
+
     min-height: 100vh;
     background:
         linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 100%),
         url("../../public/images/nature2.jpg") center/cover no-repeat fixed;
     position: relative;
-    height: 1100px;
 }
 
 .checkPage::before {
@@ -578,6 +578,8 @@ button {
     margin: 3rem auto;
     max-width: 900px;
     padding: 0 2rem;
+    position: relative;
+    z-index: 10;
 }
 
 .checkPage .form-control {
@@ -587,6 +589,11 @@ button {
     flex-wrap: wrap;
     justify-content: center;
     position: relative;
+}
+
+.city-input-wrapper {
+    position: relative;
+    z-index: 1002;
 }
 
 .checkPage input[type="text"],
@@ -652,7 +659,7 @@ button {
     box-shadow: var(--shadow-lg);
     overflow-y: auto;
     max-height: 250px;
-    z-index: 100;
+    z-index: 1001;
     animation: slideDown 0.2s ease-out;
 }
 
@@ -683,6 +690,39 @@ button {
 .autocomplete-item:hover {
     background: var(--bg-light);
     color: var(--primary-black);
+}
+
+/* Empty State */
+.empty-state {
+    max-width: 600px;
+    margin: 5rem auto;
+    text-align: center;
+    padding: 3rem 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+}
+
+.empty-state-icon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.7;
+    animation: float 3s ease-in-out infinite;
+}
+
+.empty-state h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin: 0;
 }
 
 /* Weather & Tips Cards */
