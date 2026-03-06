@@ -22,8 +22,8 @@ body {
   color: var(--text);
   font-family: "Alan Sans", "Inter", sans-serif;
   background:
-    radial-gradient(circle at 18% 20%, rgba(90, 199, 255, 0.2), transparent 26%),
-    radial-gradient(circle at 84% 10%, rgba(90, 255, 197, 0.14), transparent 22%),
+    radial-gradient(140% 70% at 15% 18%, rgba(90, 199, 255, 0.18), transparent 56%),
+    radial-gradient(120% 62% at 82% 8%, rgba(90, 255, 197, 0.12), transparent 58%),
     linear-gradient(145deg, var(--bg-1), var(--bg-2) 48%, var(--bg-3));
   min-height: 100vh;
   overflow-x: hidden;
@@ -113,50 +113,60 @@ body {
 }
 
 .page-cloud {
-  width: 150px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 50px;
-  filter: blur(0.4px);
-  animation: page-cloud-slide 20s linear infinite;
+  width: 180px;
+  height: 54px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(248, 254, 255, 0.65), rgba(210, 237, 252, 0.24));
+  box-shadow: 0 10px 24px rgba(8, 29, 44, 0.18), inset 0 -10px 14px rgba(142, 195, 221, 0.2);
+  filter: blur(0.2px);
+  animation: page-cloud-slide 26s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform, opacity;
 }
 
 .page-cloud::before,
 .page-cloud::after {
   content: "";
   position: absolute;
-  width: 40px;
-  height: 40px;
   border-radius: 50%;
-  background: inherit;
+  background: linear-gradient(180deg, rgba(247, 253, 255, 0.76), rgba(205, 235, 251, 0.3));
 }
 
 .page-cloud::before {
-  left: 10px;
-  top: -10px;
+  width: 72px;
+  height: 58px;
+  left: 22px;
+  top: -28px;
 }
 
 .page-cloud::after {
-  right: 10px;
-  top: -5px;
+  width: 96px;
+  height: 68px;
+  right: 20px;
+  top: -34px;
 }
 
 .page-cloud-one {
   left: 8%;
   top: 20%;
-  animation-duration: 22s;
+  animation-duration: 31s;
+  opacity: 0.88;
 }
 
 .page-cloud-two {
   right: 18%;
   top: 28%;
-  animation-duration: 20s;
+  animation-duration: 28s;
+  transform: scale(1.12);
+  opacity: 0.76;
 }
 
 .page-cloud-three {
   left: 58%;
   top: 18%;
-  animation-duration: 24s;
+  animation-duration: 34s;
+  transform: scale(0.92);
+  opacity: 0.72;
 }
 
 .page-drop {
@@ -194,7 +204,7 @@ body {
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 255, 224, 0.6), rgba(255, 166, 66, 0.2));
   box-shadow: 0 0 20px rgba(255, 200, 90, 0.7);
-  animation: sun-spin 12s linear infinite;
+  animation: sun-spin 11s ease-in-out infinite;
 }
 
 .page-sun-one {
@@ -533,23 +543,26 @@ a {
 .weather-preview::after {
    content: "";
    position: absolute;
-   width: 220px;
-   height: 140px;
-   background: radial-gradient(circle, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+   width: 300px;
+   height: 170px;
+   background:
+     radial-gradient(120% 90% at 50% 48%, rgba(239, 250, 255, 0.42), rgba(239, 250, 255, 0)),
+     linear-gradient(180deg, rgba(198, 230, 249, 0.16), rgba(198, 230, 249, 0));
    border-radius: 50%;
-   opacity: 0.35;
+   opacity: 0.28;
+   filter: blur(6px);
    pointer-events: none;
    z-index: 0;
 }
 .weather-preview::before {
-   left: -80px;
-   top: 40px;
-   animation: preview-glow 6s ease-in-out infinite;
+   left: -110px;
+   top: 36px;
+   animation: preview-glow 10s ease-in-out infinite;
 }
 .weather-preview::after {
-   right: -60px;
-   bottom: 40px;
-   animation: preview-glow 8s ease-in-out infinite reverse;
+   right: -95px;
+   bottom: 34px;
+   animation: preview-glow 12s ease-in-out infinite reverse;
 }
 
 .preview-head {
@@ -668,10 +681,12 @@ a {
 
 .preview-cloud {
   position: absolute;
-  width: 110px;
-  height: 32px;
+  width: 136px;
+  height: 42px;
   border-radius: 999px;
-  background: rgba(201, 236, 255, 0.55);
+  background: linear-gradient(180deg, rgba(236, 249, 255, 0.82), rgba(186, 224, 246, 0.5));
+  box-shadow: 0 8px 20px rgba(3, 22, 34, 0.15), inset 0 -8px 10px rgba(131, 184, 214, 0.2);
+  filter: blur(0.15px);
 }
 
 .preview-cloud::before,
@@ -683,29 +698,29 @@ a {
 }
 
 .preview-cloud::before {
-  width: 40px;
-  height: 40px;
-  left: 14px;
-  top: -16px;
+  width: 56px;
+  height: 48px;
+  left: 15px;
+  top: -20px;
 }
 
 .preview-cloud::after {
-  width: 52px;
-  height: 52px;
-  right: 10px;
-  top: -24px;
+  width: 74px;
+  height: 60px;
+  right: 12px;
+  top: -28px;
 }
 
 .preview-cloud-a {
   left: -16px;
   top: 18px;
-  animation: preview-cloud-drift-a 12s ease-in-out infinite;
+  animation: preview-cloud-drift-a 19s ease-in-out infinite;
 }
 
 .preview-cloud-b {
   right: -10px;
   top: 86px;
-  animation: preview-cloud-drift-b 15s ease-in-out infinite;
+  animation: preview-cloud-drift-b 23s ease-in-out infinite;
 }
 
 .contact-layout {
@@ -1458,7 +1473,8 @@ a {
 .cloud {
   position: absolute;
   border-radius: 999px;
-  background: rgba(224, 246, 255, 0.42);
+  background: linear-gradient(180deg, rgba(240, 251, 255, 0.7), rgba(183, 224, 248, 0.34));
+  box-shadow: 0 8px 22px rgba(3, 18, 29, 0.18), inset 0 -8px 12px rgba(130, 180, 208, 0.2);
   filter: blur(0.2px);
 }
 
@@ -1471,48 +1487,48 @@ a {
 }
 
 .cloud-one {
-  width: 130px;
-  height: 40px;
+  width: 152px;
+  height: 48px;
   left: 3%;
   top: 14%;
-  animation: drift 11s ease-in-out infinite;
+  animation: drift 18s ease-in-out infinite;
 }
 
 .cloud-one::before {
-  width: 55px;
-  height: 55px;
-  left: 16px;
-  top: -20px;
-}
-
-.cloud-one::after {
-  width: 65px;
-  height: 65px;
-  right: 8px;
-  top: -28px;
-}
-
-.cloud-two {
-  width: 160px;
-  height: 48px;
-  right: 3%;
-  left: auto;
-  top: 26%;
-  animation: drift 14s ease-in-out infinite reverse;
-}
-
-.cloud-two::before {
-  width: 58px;
+  width: 68px;
   height: 58px;
-  left: 20px;
+  left: 16px;
   top: -24px;
 }
 
+.cloud-one::after {
+  width: 86px;
+  height: 66px;
+  right: 10px;
+  top: -30px;
+}
+
+.cloud-two {
+  width: 186px;
+  height: 56px;
+  right: 3%;
+  left: auto;
+  top: 26%;
+  animation: drift 22s ease-in-out infinite reverse;
+}
+
+.cloud-two::before {
+  width: 72px;
+  height: 62px;
+  left: 22px;
+  top: -26px;
+}
+
 .cloud-two::after {
-  width: 70px;
-  height: 70px;
+  width: 94px;
+  height: 72px;
   right: 18px;
-  top: -28px;
+  top: -32px;
 }
 
 .rain {
@@ -1576,10 +1592,16 @@ a {
 
 @keyframes drift {
   0%, 100% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  25% {
+    transform: translate3d(18px, -4px, 0) scale(1.015);
   }
   50% {
-    transform: translateX(24px);
+    transform: translate3d(30px, 2px, 0) scale(1.03);
+  }
+  75% {
+    transform: translate3d(14px, 5px, 0) scale(1.01);
   }
 }
 
@@ -1707,31 +1729,31 @@ a {
 
 @keyframes preview-cloud-drift-a {
   0%, 100% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translateX(22px);
+    transform: translate3d(36px, -8px, 0);
   }
 }
 
 @keyframes preview-cloud-drift-b {
   0%, 100% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translateX(-24px);
+    transform: translate3d(-32px, 7px, 0);
   }
 }
 
 @keyframes page-cloud-slide {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0) scale(1);
   }
   50% {
-    transform: translateX(12px);
+    transform: translate3d(24px, -5px, 0) scale(1.03);
   }
   100% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0) scale(1);
   }
 }
 
@@ -1817,16 +1839,16 @@ a {
 
 @keyframes sun-spin {
   0% {
-    transform: rotate(0deg) scale(1);
-    opacity: 0.8;
+    transform: translateY(0) scale(1);
+    opacity: 0.74;
   }
   50% {
-    transform: rotate(7deg) scale(1.05);
-    opacity: 0.9;
+    transform: translateY(-6px) scale(1.06);
+    opacity: 0.92;
   }
   100% {
-    transform: rotate(0deg) scale(1);
-    opacity: 0.8;
+    transform: translateY(0) scale(1);
+    opacity: 0.74;
   }
 }
 
