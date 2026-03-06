@@ -29,6 +29,13 @@ body {
   overflow-x: hidden;
 }
 
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
 #root {
   overflow-x: hidden;
 }
@@ -1002,36 +1009,53 @@ a {
 
 .weather-form {
   position: relative;
-  padding: 16px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
   display: grid;
-  grid-template-columns: minmax(190px, 1.6fr) minmax(160px, 1fr) auto;
-  gap: 18px;
+  grid-template-columns: minmax(280px, 1.7fr) minmax(200px, 1fr) auto;
+  gap: 14px;
   align-items: start;
-  justify-content: center;
+  justify-content: stretch;
+  background: linear-gradient(145deg, rgba(8, 39, 64, 0.78), rgba(4, 27, 45, 0.82));
+  border: 1px solid rgba(196, 229, 255, 0.26);
+  border-radius: calc(var(--radius) + 4px);
+  box-shadow: 0 22px 38px rgba(1, 9, 16, 0.34);
+  backdrop-filter: blur(10px);
 }
 
 .field-group {
   position: relative;
   display: grid;
-  gap: 8px;
+  gap: 7px;
   align-content: start;
+  justify-items: stretch;
+  min-width: 0;
 }
 
 .field-group label {
-  color: #d9edff;
-  font-size: 0.9rem;
+  color: #eff9ff;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+  font-weight: 700;
+  opacity: 0.88;
 }
 
 .field-input-wrap {
   position: relative;
+  width: 100%;
 }
 
 .field-error {
   color: #ffc9c9;
-  font-size: 0.8rem;
+  font-size: 0.76rem;
   margin: 0;
-  min-height: 1.15rem;
+  min-height: 1rem;
   line-height: 1.2;
+  text-align: left;
 }
 
 .field-error-spacer {
@@ -1040,22 +1064,23 @@ a {
 
 .ui-input {
   width: 100%;
-  border: 1px solid rgba(185, 226, 255, 0.22);
-  border-radius: 10px;
-  background: rgba(3, 21, 33, 0.8);
+  border: 1px solid rgba(201, 235, 255, 0.28);
+  border-radius: 12px;
+  background: rgba(2, 18, 30, 0.84);
   color: #e8f7ff;
-  padding: 10px 12px;
+  min-height: 44px;
+  padding: 11px 14px;
   outline: none;
   transition: 160ms ease;
-  font-size: 0.95rem;
+  font-size: 0.96rem;
 }
 
 .weather-form .field-group .ui-input {
-  max-width: 290px;
+  max-width: 100%;
 }
 
 .weather-form .field-group .date-input {
-  max-width: 220px;
+  max-width: 100%;
 }
 
 .ui-input:focus {
@@ -1154,36 +1179,41 @@ a {
 
 .weather-submit {
   align-self: start;
-  margin-top: 30px;
+  justify-self: stretch;
+  margin-top: 26px;
   white-space: nowrap;
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
 }
 
 .city-suggestions {
   position: absolute;
-  top: calc(100% + 6px);
+  top: calc(100% + 8px);
   left: 0;
   right: 0;
   z-index: 8;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
   max-height: 220px;
   overflow-y: auto;
-  border: 1px solid rgba(190, 232, 255, 0.25);
-  box-shadow: var(--shadow);
+  border: 1px solid rgba(196, 234, 255, 0.32);
+  box-shadow: 0 20px 34px rgba(1, 8, 15, 0.46);
 }
 
 .city-item {
   width: 100%;
   text-align: left;
   border: none;
-  padding: 10px;
-  background: rgba(3, 20, 32, 0.98);
+  padding: 11px 12px;
+  background: rgba(3, 20, 32, 0.985);
   color: #daeeff;
   cursor: pointer;
+  transition: 140ms ease;
 }
 
 .city-item:hover {
-  background: rgba(40, 128, 181, 0.45);
+  background: rgba(40, 128, 181, 0.52);
 }
 
 .weather-grid {
@@ -2020,11 +2050,18 @@ a {
 @media (max-width: 700px) {
   .weather-form {
     grid-template-columns: 1fr;
+    max-width: 560px;
+    padding: 16px;
+    gap: 12px;
   }
 
   .weather-form .field-group .ui-input,
   .weather-form .field-group .date-input {
     max-width: 100%;
+  }
+
+  .weather-submit {
+    width: 100%;
   }
 
   .metric-grid {
