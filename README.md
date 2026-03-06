@@ -4,7 +4,7 @@ A modern weather forecasting web application built with React.
 
 ## Live Demo
 
-**Visit:** [rootcast.bigroot.uz](https://rootcast.bigroot.uz)
+**Visit:** [rootcast.diyorjon.com](https://rootcast.diyorjon.com)
 
 ## Features
 
@@ -39,7 +39,7 @@ The app will run on `http://localhost:3000`
 
 ## API Integration
 
-Backend: `apicast.bigroot.uz/api`
+Backend: `apicast.diyorjon.com/api`
 
 ## Team
 
