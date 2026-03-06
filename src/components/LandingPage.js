@@ -7,7 +7,7 @@ const rainDrops = Array.from({ length: 72 }, (_, index) => {
   return {
     left: ((seed * 37) % 100) + Math.random() * 0.7,
     delay: (seed % 13) * -0.17,
-    duration: 1.15 + ((seed * 19) % 7) * 0.14,
+    duration: 1.8 + ((seed * 19) % 7) * 0.2,
     height: 9 + ((seed * 11) % 13),
     opacity: 0.26 + ((seed * 5) % 7) * 0.08,
     width: 1 + ((seed * 3) % 2),
