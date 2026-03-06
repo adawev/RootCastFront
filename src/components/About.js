@@ -3,6 +3,16 @@ import Footer from "./Footer";
 function About() {
   return (
     <div className="simple-page">
+      <div className="about-anim" aria-hidden="true">
+        <span className="about-anim-dot dot-one" />
+        <span className="about-anim-dot dot-two" />
+        <span className="about-anim-line" />
+      </div>
+      <div className="page-bg page-bg-spark" aria-hidden="true">
+        <span className="page-spark page-spark-one" />
+        <span className="page-spark page-spark-two" />
+        <span className="page-sun page-sun-three" />
+      </div>
       <section className="simple-hero">
         <h1>About RootCast</h1>
         <p>RootCast is a weather-first platform focused on clear forecasts, strong UX, and actionable travel context.</p>

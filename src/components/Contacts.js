@@ -15,6 +15,11 @@ function Contacts() {
 
   return (
     <div className="simple-page">
+      <div className="page-bg page-bg-clouds" aria-hidden="true">
+        <span className="page-cloud page-cloud-two" />
+        <span className="page-drop page-drop-one" />
+        <span className="page-sun page-sun-one" />
+      </div>
       <section className="simple-hero">
         <h1>Contact Us</h1>
         <p>For support, suggestions, or partnership requests.</p>

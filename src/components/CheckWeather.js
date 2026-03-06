@@ -17,6 +17,14 @@ const windDirection = (degrees = 0) => {
   return dirs[index];
 };
 
+const weatherAnimClass = (main = "") => {
+  const value = main.toLowerCase();
+  if (value.includes("rain")) return "mini-icon mini-rain";
+  if (value.includes("snow")) return "mini-icon mini-snow";
+  if (value.includes("cloud")) return "mini-icon mini-cloud";
+  return "mini-icon mini-sun";
+};
+
 function CheckWeather() {
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.weathercheck);
@@ -84,6 +92,12 @@ function CheckWeather() {
 
   return (
     <div className="weather-page">
+      <div className="page-bg page-bg-rain" aria-hidden="true">
+        <span className="page-cloud page-cloud-one" />
+        <span className="page-cloud page-cloud-three" />
+        <span className="page-drop page-drop-two" />
+        <span className="page-sun page-sun-two" />
+      </div>
       <section className="weather-hero">
         <h1>Weather Intelligence, Reimagined</h1>
         <p>Search any city, pick a date, and explore richer weather insights with animated, clear data cards.</p>
@@ -218,12 +232,21 @@ function CheckWeather() {
         <section className="hourly-timeline">
           <div className="timeline-head">
             <p className="kicker">Hourly Timeline</p>
-            <h3>Next Forecast Slots</h3>
+            <h3>
+              <span className="section-icon section-icon-timeline" aria-hidden="true">
+                <span />
+                <span />
+              </span>
+              Next Forecast Slots
+            </h3>
           </div>
           <div className="timeline-strip">
             {data.hourly.map((item, idx) => (
               <article key={`${item.dateTime}-${idx}`} className="timeline-item">
-                <p className="time">{item.dateTime?.slice(11, 16) || "--:--"}</p>
+                <div className="time-row">
+                  <p className="time">{item.dateTime?.slice(11, 16) || "--:--"}</p>
+                  <span className={weatherAnimClass(item.main)} aria-hidden="true" />
+                </div>
                 <h4>{Math.round(item.temp)}°C</h4>
                 <p>{item.main}</p>
                 <small>Rain: {Math.round(item.precipitationChance)}%</small>
@@ -238,12 +261,18 @@ function CheckWeather() {
         <section className="air-uv-section">
           <div className="air-uv-card">
             <p className="kicker">Air Quality</p>
+            <div className="section-icon section-icon-air" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
             <h3>{data.aqi ? `AQI ${data.aqi}/5` : "AQI N/A"}</h3>
             <p>PM2.5: {Math.round(data.pm25 ?? 0)} µg/m³</p>
             <p>PM10: {Math.round(data.pm10 ?? 0)} µg/m³</p>
           </div>
           <div className="air-uv-card">
             <p className="kicker">UV Index</p>
+            <div className="section-icon section-icon-uv" aria-hidden="true" />
             <h3>{(data.uvi ?? 0).toFixed(1)}</h3>
             <p>{(data.uvi ?? 0) >= 6 ? "High exposure risk. Use protection." : "Moderate or low UV exposure."}</p>
           </div>

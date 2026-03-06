@@ -2,9 +2,45 @@ import { Link } from "react-router";
 import Button from "./ui/Button";
 import Footer from "./Footer";
 
+const rainDrops = Array.from({ length: 72 }, (_, index) => {
+  const seed = index + 1;
+  return {
+    left: ((seed * 37) % 100) + Math.random() * 0.7,
+    delay: (seed % 13) * -0.17,
+    duration: 1.15 + ((seed * 19) % 7) * 0.14,
+    height: 9 + ((seed * 11) % 13),
+    opacity: 0.26 + ((seed * 5) % 7) * 0.08,
+    width: 1 + ((seed * 3) % 2),
+    drift: ((seed * 7) % 5) - 2
+  };
+});
+
 function LandingPage() {
   return (
     <div className="landing-page">
+      <div className="page-bg page-bg-clouds" aria-hidden="true">
+        <span className="page-cloud page-cloud-one" />
+        <span className="page-cloud page-cloud-two" />
+        <span className="page-drop page-drop-one" />
+        <span className="page-sun page-sun-one" />
+        <div className="page-rain-overlay">
+          {rainDrops.map((drop, index) => (
+            <span
+              key={`rain-${index}`}
+              className="page-rain-line"
+              style={{
+                left: `${drop.left}%`,
+                animationDelay: `${drop.delay}s`,
+                animationDuration: `${drop.duration}s`,
+                height: `${drop.height}%`,
+                opacity: drop.opacity,
+                width: `${drop.width}px`,
+                "--rain-drift": `${drop.drift}px`
+              }}
+            />
+          ))}
+        </div>
+      </div>
       <section className="hero">
         <div className="weather-visual" aria-hidden="true">
           <div className="sun-core" />
@@ -62,6 +98,10 @@ function LandingPage() {
       </section>
 
       <section className="weather-preview">
+        <div className="preview-cloud-layer" aria-hidden="true">
+          <span className="preview-cloud preview-cloud-a" />
+          <span className="preview-cloud preview-cloud-b" />
+        </div>
         <div className="preview-head">
           <p className="kicker">UI Preview</p>
           <h2>How Weather Information Is Displayed</h2>
@@ -78,7 +118,9 @@ function LandingPage() {
               <strong>21°</strong>
               <span>L 18° / H 24°</span>
             </div>
-            <p className="preview-desc">Clouds • broken clouds</p>
+            <p className="preview-desc">
+              <span className="mini-icon mini-cloud" aria-hidden="true" /> Clouds • broken clouds
+            </p>
           </article>
 
           <article className="preview-metrics">
@@ -91,7 +133,24 @@ function LandingPage() {
               <div><span>Cloudiness</span><b>76%</b></div>
               <div><span>Visibility</span><b>8 km</b></div>
               <div><span>Rain Chance</span><b>35%</b></div>
-              <div><span>AQI / UV</span><b>2 / 4.8</b></div>
+              <div>
+                <span>
+                  <span className="section-icon section-icon-air preview-inline-icon" aria-hidden="true">
+                    <span />
+                    <span />
+                    <span />
+                  </span>
+                  AQI
+                </span>
+                <b>2 / 5</b>
+              </div>
+              <div>
+                <span>
+                  <span className="section-icon section-icon-uv preview-inline-icon" aria-hidden="true" />
+                  UV Index
+                </span>
+                <b>4.8</b>
+              </div>
             </div>
           </article>
 
@@ -102,6 +161,48 @@ function LandingPage() {
               <li>Moderate humidity: carry water for long walks.</li>
               <li>Best outdoor window: after 16:00 before sunset.</li>
             </ul>
+          </article>
+        </div>
+        <div className="preview-hourly">
+          <article className="timeline-item">
+            <div className="time-row">
+              <p className="time">09:00</p>
+              <span className="mini-icon mini-sun" aria-hidden="true" />
+            </div>
+            <h4>20°C</h4>
+            <p>Clear</p>
+            <small>Rain: 10%</small>
+            <small>Wind: 3.8 m/s</small>
+          </article>
+          <article className="timeline-item">
+            <div className="time-row">
+              <p className="time">12:00</p>
+              <span className="mini-icon mini-cloud" aria-hidden="true" />
+            </div>
+            <h4>22°C</h4>
+            <p>Clouds</p>
+            <small>Rain: 24%</small>
+            <small>Wind: 4.2 m/s</small>
+          </article>
+          <article className="timeline-item">
+            <div className="time-row">
+              <p className="time">15:00</p>
+              <span className="mini-icon mini-rain" aria-hidden="true" />
+            </div>
+            <h4>21°C</h4>
+            <p>Rain</p>
+            <small>Rain: 58%</small>
+            <small>Wind: 5.1 m/s</small>
+          </article>
+          <article className="timeline-item">
+            <div className="time-row">
+              <p className="time">18:00</p>
+              <span className="mini-icon mini-snow" aria-hidden="true" />
+            </div>
+            <h4>17°C</h4>
+            <p>Snow</p>
+            <small>Rain: 42%</small>
+            <small>Wind: 3.4 m/s</small>
           </article>
         </div>
       </section>
