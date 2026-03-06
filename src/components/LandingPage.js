@@ -1,102 +1,47 @@
-import {Link} from "react-router";
+import { Link } from "react-router";
+import Button from "./ui/Button";
 import Footer from "./Footer";
 
 function LandingPage() {
-    return <div>
-        <section className="hero">
-            <div className="hero-content">
-                <h1>Real time, real weather</h1>
-                <p>Instant and accurate forecasts at your fingertips. Get real-time weather updates from anywhere in the
-                    world.</p>
-                <Link to="/check-weather">
-                    <button className="cloud-button">
-                        <span className="cloud-icon">☁️</span>
-                        Check Weather
-                    </button>
-                </Link>
+  return (
+    <div className="landing-page">
+      <section className="hero">
+        <div className="hero-content">
+          <p className="kicker">RootCast Weather Platform</p>
+          <h1>Animated forecasts with real-world travel context</h1>
+          <p>
+            Explore current and upcoming weather with a modern interface, clear risk signals, and practical tips in one
+            place.
+          </p>
+          <Link to="/check-weather">
+            <Button size="lg">Start Weather Check</Button>
+          </Link>
+        </div>
+      </section>
 
-            </div>
-        </section>
-
-        <section className="info-section">
-            <div className="info-content">
-                <div className="info-text">
-                    <h2>Real-Time Weather Data</h2>
-                    <p>Get instant access to accurate weather information for any location around the globe. Our
-                        advanced forecasting system provides detailed data including temperature, humidity, wind speed,
-                        and more.</p>
-                    <p>Whether you're planning your day or preparing for a trip, we've got you covered with reliable
-                        weather insights.</p>
-                    <ul className="info-features">
-                        <li>Accurate 7-day forecasts</li>
-                        <li>Hourly weather updates</li>
-                        <li>Severe weather alerts</li>
-                        <li>Global location coverage</li>
-                    </ul>
-                </div>
-
-                <div className="info-card">
-                    <div className="card-intro">
-                        <h3>Live Weather Data</h3>
-                        <p>See real-time weather conditions for any location</p>
-                    </div>
-
-                    <div className="location-header">
-                        <h3 className="location-name">New York, USA</h3>
-                        <span className="location-icon">📍</span>
-                    </div>
-
-                    <div className="weather-main">
-                        <div className="temperature">22°C</div>
-                        <div className="condition">Partly Cloudy</div>
-                    </div>
-
-                    <div className="weather-details">
-                        <div className="detail-item">
-                            <div className="detail-label">Humidity</div>
-                            <div className="detail-value">68%</div>
-                        </div>
-                        <div className="detail-item">
-                            <div className="detail-label">Wind Speed</div>
-                            <div className="detail-value">15 km/h</div>
-                        </div>
-                        <div className="detail-item">
-                            <div className="detail-label">Pressure</div>
-                            <div className="detail-value">1013 hPa</div>
-                        </div>
-                        <div className="detail-item">
-                            <div className="detail-label">Visibility</div>
-                            <div className="detail-value">10 km</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section className="features">
-            <h2 className="features-title">Why Choose Us</h2>
-            <div className="features-grid">
-                <div className="feature-item">
-                    <div className="feature-icon">🌍</div>
-                    <div className="feature-title">Global Coverage</div>
-                    <div className="feature-text">Access accurate weather data from thousands of locations around the
-                        world
-                    </div>
-                </div>
-                <div className="feature-item">
-                    <div className="feature-icon">⏱️</div>
-                    <div className="feature-title">Real-time Updates</div>
-                    <div className="feature-text">Get the latest forecasts updated every minute with precise accuracy</div>
-                </div>
-                <div className="feature-item">
-                    <div className="feature-icon">🎨</div>
-                    <div className="feature-title">Simple & Clean Design</div>
-                    <div className="feature-text">Beautiful minimalist interface that's intuitive and easy to navigate</div>
-                </div>
-            </div>
-        </section>
-        <Footer/>
+      <section className="features">
+        <h2 className="features-title">Designed For Fast Decisions</h2>
+        <div className="features-grid">
+          <div className="feature-item">
+            <div className="feature-icon">🌤️</div>
+            <h3>Expanded Data</h3>
+            <p>Temperature bands, visibility, wind direction, cloudiness, sunrise and sunset details.</p>
+          </div>
+          <div className="feature-item">
+            <div className="feature-icon">⚡</div>
+            <h3>Fast Interactions</h3>
+            <p>Smart city search, smooth transitions, responsive layout and clean state handling.</p>
+          </div>
+          <div className="feature-item">
+            <div className="feature-icon">🛡️</div>
+            <h3>Resilient UX</h3>
+            <p>Friendly error messages, retry actions, and preserved previous results on failures.</p>
+          </div>
+        </div>
+      </section>
+      <Footer />
     </div>
+  );
 }
 
 export default LandingPage;
