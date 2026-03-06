@@ -20,8 +20,17 @@ function Contacts() {
         <p>For support, suggestions, or partnership requests.</p>
       </section>
 
-      <section className="simple-card">
-        <form className="contact-form" onSubmit={handleSubmit(onSubmit)}>
+      <section className="contact-layout">
+        <aside className="contact-side">
+          <h2>Support Form</h2>
+          <p>Share your issue with city/date context for faster troubleshooting.</p>
+          <ul>
+            <li>Include city name used</li>
+            <li>Mention selected date</li>
+            <li>Attach expected vs actual result</li>
+          </ul>
+        </aside>
+        <form className="contact-form contact-main" onSubmit={handleSubmit(onSubmit)}>
           <label>
             Name
             <Input {...register("name", { required: "Name is required" })} />
@@ -39,6 +48,20 @@ function Contacts() {
           </label>
           <Button type="submit" loading={isSubmitting}>Send Message</Button>
         </form>
+      </section>
+      <section className="contact-meta">
+        <article className="contact-meta-item">
+          <h4>Response Time</h4>
+          <p>Most product questions receive a response within one business day.</p>
+        </article>
+        <article className="contact-meta-item">
+          <h4>Best Message Format</h4>
+          <p>Include searched city, selected date, and what you expected vs what you saw.</p>
+        </article>
+        <article className="contact-meta-item">
+          <h4>Partnerships</h4>
+          <p>For integrations or collaboration requests, include your organization and use case.</p>
+        </article>
       </section>
 
       <Footer />

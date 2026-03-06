@@ -75,6 +75,11 @@ function CheckWeather() {
     { label: "Wind", value: `${data?.windSpeed ?? 0} m/s ${windDirection(data?.windDeg)}` },
     { label: "Wind Gust", value: `${data?.windGust ?? 0} m/s` },
     { label: "Sunrise / Sunset", value: `${toClock(data?.sunrise)} / ${toClock(data?.sunset)}` },
+    { label: "Precipitation Chance", value: `${Math.round(data?.precipitationChance ?? 0)}%` },
+    { label: "Rain / Snow (3h)", value: `${data?.rainVolume ?? 0} / ${data?.snowVolume ?? 0} mm` },
+    { label: "AQI", value: data?.aqi ? `${data.aqi} / 5` : "N/A" },
+    { label: "PM2.5 / PM10", value: `${Math.round(data?.pm25 ?? 0)} / ${Math.round(data?.pm10 ?? 0)} µg/m³` },
+    { label: "UV Index", value: `${(data?.uvi ?? 0).toFixed(1)}` },
   ];
 
   return (
@@ -208,6 +213,57 @@ function CheckWeather() {
           </article>
         </section>
       )}
+
+      {!loading && data?.hourly?.length > 0 && (
+        <section className="hourly-timeline">
+          <div className="timeline-head">
+            <p className="kicker">Hourly Timeline</p>
+            <h3>Next Forecast Slots</h3>
+          </div>
+          <div className="timeline-strip">
+            {data.hourly.map((item, idx) => (
+              <article key={`${item.dateTime}-${idx}`} className="timeline-item">
+                <p className="time">{item.dateTime?.slice(11, 16) || "--:--"}</p>
+                <h4>{Math.round(item.temp)}°C</h4>
+                <p>{item.main}</p>
+                <small>Rain: {Math.round(item.precipitationChance)}%</small>
+                <small>Wind: {item.windSpeed} m/s</small>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {!loading && data && (
+        <section className="air-uv-section">
+          <div className="air-uv-card">
+            <p className="kicker">Air Quality</p>
+            <h3>{data.aqi ? `AQI ${data.aqi}/5` : "AQI N/A"}</h3>
+            <p>PM2.5: {Math.round(data.pm25 ?? 0)} µg/m³</p>
+            <p>PM10: {Math.round(data.pm10 ?? 0)} µg/m³</p>
+          </div>
+          <div className="air-uv-card">
+            <p className="kicker">UV Index</p>
+            <h3>{(data.uvi ?? 0).toFixed(1)}</h3>
+            <p>{(data.uvi ?? 0) >= 6 ? "High exposure risk. Use protection." : "Moderate or low UV exposure."}</p>
+          </div>
+        </section>
+      )}
+
+      <section className="weather-notes">
+        <article className="note-item">
+          <h4>Metric Guide</h4>
+          <p>Visibility under 3 km may affect driving comfort; wind gusts above 10 m/s can feel intense outdoors.</p>
+        </article>
+        <article className="note-item">
+          <h4>Comfort Note</h4>
+          <p>Compare temperature with feels-like value to estimate humidity and wind impact on body comfort.</p>
+        </article>
+        <article className="note-item">
+          <h4>Planning Tip</h4>
+          <p>Check sunrise/sunset and cloudiness together to choose the best time for outdoor activities.</p>
+        </article>
+      </section>
 
       <Footer />
     </div>
