@@ -105,36 +105,40 @@ function CheckWeather() {
 
       <section className="weather-search-shell">
         <form className="weather-form" onSubmit={handleSubmit(onSubmit)}>
-          <div className="field-group">
+          <div className={`field-group ${errors.city ? "has-error" : ""}`}>
             <label htmlFor="city">City</label>
-            <Input
-              id="city"
-              type="text"
-              placeholder="Type city name..."
-              autoComplete="off"
-              {...register("city", {
-                required: "City is required",
-                minLength: { value: 2, message: "At least 2 characters" },
-              })}
-            />
-            {errors.city && <p className="field-error">{errors.city.message}</p>}
-            {filteredCities.length > 0 && (
-              <div className="city-suggestions">
-                {filteredCities.map((c) => (
-                  <button
-                    key={`${c.id}-${c.name}`}
-                    type="button"
-                    className="city-item"
-                    onClick={() => {
-                      setValue("city", c.name);
-                      setFilteredCities([]);
-                    }}
-                  >
-                    {c.name}, {c.country}
-                  </button>
-                ))}
-              </div>
-            )}
+            <div className="field-input-wrap">
+              <Input
+                id="city"
+                type="text"
+                placeholder="Type city name..."
+                autoComplete="off"
+                aria-invalid={errors.city ? "true" : "false"}
+                className={errors.city ? "input-error" : ""}
+                {...register("city", {
+                  required: "City is required",
+                  minLength: { value: 2, message: "At least 2 characters" },
+                })}
+              />
+              {filteredCities.length > 0 && !errors.city && (
+                <div className="city-suggestions">
+                  {filteredCities.map((c) => (
+                    <button
+                      key={`${c.id}-${c.name}`}
+                      type="button"
+                      className="city-item"
+                      onClick={() => {
+                        setValue("city", c.name);
+                        setFilteredCities([]);
+                      }}
+                    >
+                      {c.name}, {c.country}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <p className="field-error" aria-live="polite">{errors.city?.message || "\u00A0"}</p>
           </div>
 
           <div className="field-group">
@@ -142,12 +146,14 @@ function CheckWeather() {
             <Input
               id="date"
               type="date"
+              className="date-input"
               min={new Date().toISOString().split("T")[0]}
               {...register("date")}
             />
+            <p className="field-error field-error-spacer" aria-hidden="true">&nbsp;</p>
           </div>
 
-          <Button type="submit" loading={loading}>
+          <Button type="submit" loading={loading} className="weather-submit">
             {loading ? "Loading Weather..." : "Get Weather"}
           </Button>
         </form>
